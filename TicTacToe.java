@@ -238,22 +238,22 @@ class TicTacToe
             //bot
             node = new Node(grid, player, null, deep, last_move);
             move = node.get_best_move();
-            if (node.is_winning())
-            {
-                System.out.println("j'ai gagné!");
-                return;
-            }
-            else if(node.deep>=8)
-            {
-                System.out.println("match nul");
-                return;
-            }
-            node.see_grid();
             grid[move]=player%2+1;
             last_move = move;
             deep++;
             System.out.println("je joue: "+(move+1));
             node.see_grid();
+            node = new Node(grid, player%2+1, null, deep, last_move);
+            if (node.is_winning())
+            {
+                System.out.println("j'ai gagné!1");
+                return;
+            }
+            else if(node.deep>8)
+            {
+                System.out.println("match nul1");
+                return;
+            }
             node.next_player = node.next_player%2+1;
 
             //player
@@ -262,9 +262,10 @@ class TicTacToe
             grid[input-1]=player;
             last_move = input-1;
             deep++;
+            node.see_grid();
             if(node.deep>=8)
             {
-                System.out.println("match nul");
+                System.out.println("match nul2");
                 return;
             }
         }        
